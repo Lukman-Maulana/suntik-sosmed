@@ -1,0 +1,253 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400&display=swap');
+
+/* Variabel Warna Neon */
+:root {
+    --bg-color: #0d0221;
+    --primary-glow: #00f5d4;
+    --secondary-glow: #9b5de5;
+    --tertiary-glow: #f15bb5;
+    --text-color: #f0eff4;
+    --glass-bg: rgba(42, 33, 79, 0.3);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Latar Belakang Animasi */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(45deg, #020024, #0d0221, #2a214f, #0d0221);
+    background-size: 400% 400%;
+    animation: gradient-flow 15s ease infinite;
+}
+
+@keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Efek Kaca Buram (Glassmorphism) */
+.glass-card {
+    background: var(--glass-bg);
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 4rem 0;
+    margin-bottom: 3rem;
+}
+.main-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--primary-glow);
+    text-shadow: 0 0 15px var(--primary-glow), 0 0 25px var(--primary-glow);
+    animation: text-flicker 3s infinite alternate;
+}
+@keyframes text-flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 10px #00f5d4, 0 0 20px #00f5d4, 0 0 40px #00f5d4; }
+    20%, 24%, 55% { text-shadow: none; }
+}
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-top: 0.5rem;
+}
+.stats {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+}
+.stats i {
+    font-size: 1.5rem;
+    color: var(--secondary-glow);
+}
+
+/* Judul Section */
+.section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    color: var(--text-color);
+}
+.section-title i {
+    color: var(--tertiary-glow);
+}
+
+/* ================================= */
+/* ===== KARTU PRODUK (FIXED) ====== */
+/* ================================= */
+.category-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--secondary-glow);
+    color: var(--text-color);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.product-card {
+    position: relative;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(transparent, var(--primary-glow), transparent 30%);
+    animation: rotate 4s linear infinite;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.product-card:hover::before {
+    opacity: 1;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-card h3,
+.product-card .price,
+.product-card .buy-button {
+    position: relative;
+    z-index: 1; /* Pastikan konten selalu di atas border animasi */
+}
+
+.product-card h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.product-card .price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-glow);
+    margin-bottom: 1.5rem;
+}
+
+/* Tombol */
+.buy-button {
+    display: inline-block;
+    background: linear-gradient(45deg, var(--secondary-glow), var(--tertiary-glow));
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px var(--secondary-glow), 0 0 20px var(--tertiary-glow);
+}
+
+.buy-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--secondary-glow), 0 0 40px var(--tertiary-glow);
+}
+
+.buy-button:disabled {
+    background: #555;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+
+/* Testimoni & Form */
+.testimonial-section, .form-section {
+    margin-top: 4rem;
+}
+.testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+.testimonial-card { padding: 1.5rem; }
+.testimonial-card .card-header { display: flex; align-items: center; margin-bottom: 1rem; }
+.testimonial-card img { width: 50px; height: 50px; border-radius: 50%; margin-right: 1rem; border: 2px solid var(--primary-glow); }
+.testimonial-card h4 { font-weight: 600; font-size: 1.1rem; }
+.testimonial-card p { font-style: italic; color: #ccc; }
+.loading-testimonial, .no-testimonial { text-align: center; color: var(--subtle-text); padding: 2rem; grid-column: 1 / -1; }
+
+#testimonial-form { padding: 2.5rem; }
+#testimonial-form input, #testimonial-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    background-color: var(--glass-bg);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    backdrop-filter: blur(5px);
+}
+#testimonial-form input:focus, #testimonial-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-glow);
+}
+
+/* Footer */
+footer { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-color); color: #888; }
+.social-media { margin-bottom: 1rem; }
+.social-media a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 2rem;
+    margin: 0 1rem;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.social-media a:hover {
+    color: var(--primary-glow);
+    text-shadow: 0 0 15px var(--primary-glow);
+}
+
+@keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
